@@ -18,6 +18,14 @@
 		
 		<link rel="stylesheet" href="$rc.contextPath/plugins/webuploader/css/webuploader.css"/>
         <link rel="stylesheet" href="$rc.contextPath/plugins/webuploader/upload/style.css"/>
+		<style >
+			.webuploader-pick{
+        		width:78px;
+        		height:30px;
+        		padding:0px;
+        		line-height:30px;
+			}
+        </style>
 		<script >
 			globalContextPath = "$rc.contextPath";
         </script>
