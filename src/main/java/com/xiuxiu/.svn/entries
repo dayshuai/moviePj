@@ -1,0 +1,58 @@
+10
+
+dir
+1350
+svn://localhost/xiuxiu/src/main/java/com/xiuxiu
+svn://localhost
+
+
+
+2013-03-29T07:01:25.093750Z
+1347
+xy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a4c24309-e7e3-a845-ba93-eba36a5c7f1d
+
+repository
+dir
+
+solr
+dir
+
+service
+dir
+
+utils
+dir
+
+quartz
+dir
+
+mybatis
+dir
+
+base
+dir
+
+entity
+dir
+
+rest
+dir
+
+web
+dir
+

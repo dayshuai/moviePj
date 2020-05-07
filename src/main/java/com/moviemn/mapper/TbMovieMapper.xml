@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moviemn.mapper.TbMovieMapper">
+	<resultMap type="com.moviemn.bean.TbMovie" id="TbMovie">
+				<result column="pic_path" property="picPath"/>
+	</resultMap>
+	
+	<sql id="columns">
+		id,name,url,pic_path,create_date,update_date
+	</sql>
+	
+	<insert id="insert" parameterType="TbMovie"  useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_movie (name,url,pic_path,create_date,update_date)
+		VALUES (#{name},#{url},#{picPath},sysdate(),sysdate())
+	</insert>
+
+	<update id="update" parameterType="TbMovie">
+		UPDATE tb_movie
+ 		SET name=#{name},url=#{url},pic_path=#{picPath},create_date=#{createDate},update_date=#{updateDate}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM tb_movie WHERE id=#{value}
+	</delete>
+	
+	<delete id="deletes" parameterType="String">
+		DELETE FROM tb_movie WHERE id in ( #{value} )
+	</delete>
+	
+	<delete id="deleteForMap" parameterType="Map">
+		DELETE FROM tb_movie WHERE ${columnName}=#{columnValue}
+	</delete>
+
+	<select id="queryObjectPaginationCount" resultType="Integer" parameterType="TbMovie">
+		SELECT COUNT(1) FROM tb_movie 
+		WHERE 1=1 
+		<if test="searchColumn!=null and searchColumn!='' and searchValue!=null and searchValue!=''">
+			AND ${searchColumn} like '%${searchValue}%'
+		</if>
+		<if test="(searchColumn==null || searchColumn=='') and searchValue!=null and searchValue!=''">
+		</if>
+	</select>
+
+	<select id="queryObjectPaginationList" resultMap="TbMovie" parameterType="TbMovie">
+		SELECT
+		<include refid="columns"/>
+		FROM tb_movie TbMovie
+		WHERE 1=1 
+		<if test="searchColumn!=null and searchColumn!='' and searchValue!=null and searchValue!=''">
+			AND ${searchColumn} like '%${searchValue}%'
+		</if>
+		<if test="(searchColumn==null || searchColumn=='') and searchValue!=null and searchValue!=''">
+		</if>
+		<if test="sortColumn!=null and sortColumn!=''">
+			ORDER BY ${sortColumn}
+		</if>
+		<if test="sortColumn==null||sortColumn==''">
+			ORDER BY id
+		</if>
+		LIMIT ${pageStart},${pageSize}
+	</select>
+
+	<select id="querySingleObject" resultType="TbMovie" parameterType="Integer">
+		SELECT <include refid="columns"/> FROM tb_movie WHERE id=#{value} LIMIT 0,1
+	</select>
+	
+	<select id="querySingleObjectForMap" resultType="TbMovie" parameterType="Map">
+		SELECT <include refid="columns"/> FROM tb_movie WHERE ${columnName}=#{columnValue} LIMIT 0,1
+	</select>
+
+	<select id="queryObjectCount" resultType="Integer">
+		SELECT count(1) FROM tb_movie 
+	</select>
+
+	<select id="queryObjectList" resultType="TbMovie">
+		SELECT <include refid="columns"/> FROM tb_movie 
+	</select>
+	
+	<select id="queryObjectCountForMap" resultType="Integer" parameterType="Map">
+		SELECT count(1) FROM tb_movie WHERE ${columnName}=#{columnValue}
+	</select>
+	
+	<select id="queryObjectListForMap" resultType="TbMovie" parameterType="Map">
+		SELECT <include refid="columns"/> FROM tb_movie WHERE ${columnName}=#{columnValue}
+	</select>
+</mapper>
