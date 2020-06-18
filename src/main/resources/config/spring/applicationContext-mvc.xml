@@ -34,6 +34,13 @@
                         <value>application/json;charset=UTF-8</value>
                     </list>
                 </property>
+                 <property name="features">
+		          <list>
+		            <value>WriteMapNullValue</value>
+		            <value>QuoteFieldNames</value>
+		            <value>WriteDateUseDateFormat</value>
+		          </list>
+		        </property>	
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
@@ -41,9 +48,14 @@
         class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <property name="messageConverters">  
             <list>  
-                <ref bean="mappingJackson2HttpMessageConverter" />  
+                <ref bean="mappingJackson2HttpMessageConverter" /> 
             </list>  
-        </property>  
+        </property> 
+        
+        <property name="webBindingInitializer">
+		<!-- 这里注册自定义数据绑定类  日期传递[前台-后台] -->
+			<bean class="com.moviemn.util.MvcDateConverter" />  
+		</property> 
     </bean>  
     <bean id="mappingJackson2HttpMessageConverter"  
         class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
@@ -55,7 +67,6 @@
             </list>  
         </property>  
     </bean>
-
 
 
 
@@ -79,8 +90,8 @@
 	    <property name="resourceLoaderPath"  value="WEB-INF/velocity/" /><!-- 設置模板防止位置-->    
 	    <property name="velocityProperties">    
 	        <props>    
-	            <prop key="directive.foreach.counter.name">loopCounter</prop>    
-	            <prop key="directive.foreach.counter.initial.value">0</prop>    
+	            <prop key="directive.foreach.counter.name">velocityCount</prop>    
+	            <prop key="directive.foreach.counter.initial.value">1</prop>    
 	            <prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->    
 	            <prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
 	            <prop key="velocimacro.library">horn/macro.vm</prop> 

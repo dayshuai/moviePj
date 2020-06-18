@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moviemn.base.BaseController;
-import com.moviemn.utils.DateTimeUtil;
+import com.moviemn.util.DateTimeUtil;
 
 @Controller
 @RequestMapping({ "/upload" })

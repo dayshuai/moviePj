@@ -2,7 +2,10 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+	 <settings>
+        <!-- sql 打印到控制台 -->
+        <setting name="logImpl" value="LOG4J"/>
+	 </settings>
 	<!-- 定义 别名 -->
 	<typeAliases>
 		<!--todo 批量别名定义 指定包路径，自动扫描包下边的pojo，定义别名，别名默认为类名（首字母小写或大写） -->

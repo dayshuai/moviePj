@@ -17,12 +17,12 @@
 	    	  },                          // 选择文件的按钮。可选。
 	    accept: {  
 	        title: 'Files',  
-	        extensions: 'jpg,png',
-	        mimeTypes: '.jpg,.png'  
+	        extensions: 'jpg,png,mp4',
+	        mimeTypes: '.jpg,.png,.mp4'  
 	    },
 	    fileNumLimit: 1,                              //最大上传数量为1
-	    fileSingleSizeLimit: 30 * 1024 * 1024,         //限制上传单个文件大小30M
-	    fileSizeLimit: 30 * 1024 * 1024,              //限制上传所有文件大小30M
+	    fileSingleSizeLimit: 3000 * 1024 * 1024,         //限制上传单个文件大小30M
+	    fileSizeLimit: 3000 * 1024 * 1024,              //限制上传所有文件大小30M
 	    resize: false                                  // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
 	});
 	
@@ -74,7 +74,7 @@
 
 	// 文件上传过程中创建进度条实时显示。
 	uploaderTrustJson.on( 'uploadProgress', function( file, percentage ) {
-		var $percent = $('.progress .progress-bar');
+		var $percent = $('.progress-bar-striped');
 	    $percent.css( 'width', percentage * 100 + '%' );
 	    
     });
@@ -85,9 +85,8 @@
 	uploaderTrustJson.on( 'uploadSuccess', function( file, data ) {
 		var rs=data;
 		var returnCode = rs.return_code;
-		$("#imageUrl").val(data.data);
-		alert("上传成功");
-		
+		$("#picPath").val(data.data);
+		$("#viewpic").attr("src",globalContextPath + data.data);
 	});
 	
 

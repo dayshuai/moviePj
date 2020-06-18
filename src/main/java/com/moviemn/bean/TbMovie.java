@@ -5,7 +5,7 @@ import java.util.Date;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.moviemn.base.BaseBean;
-import com.moviemn.utils.DateTimeSerializer;
+import com.moviemn.util.DateTimeSerializer;
 
 public class TbMovie extends BaseBean implements java.io.Serializable {
 	/** 序号 **/

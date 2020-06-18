@@ -20,14 +20,46 @@
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 <title>Aliplayer Online Settings</title>
 <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
-<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="$rc.contextPath/js/aliplayer-min.js"></script>
+<style >
+    .myui-content__list{ position: relative;}
+    .myui-content__list li{ float: left; padding: 10px;}
+    .myui-content__list li a{ display: block; padding: 8px; text-align: center; width:100%; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis; white-space:nowrap;}
+    .myui-play__list li{ float: left;}
+    .myui-play__list li a{ display: block; padding: 8px 0; text-align: center;}
+	
+	/* btn */
+    .btn-default{ background-color: #eee; color: #333; background: linear-gradient(to right,#eeeeee 0,#f6f6f6 100%); box-shadow: 0 5px 10px rgba(246,246,246,.25);}
+    .btn-warm{ background-color: #ff9900; background: linear-gradient(to right,#ff9900 0,#ff9f16 100%); box-shadow: 0 5px 10px rgba(255,111,0,.25);}
+    .btn-primary{ background-color: #4fb1f7; background: linear-gradient(to right,#4fb1f7 0,#6bb8ee 100%); box-shadow: 0 5px 10px rgba(107,184,238,.25);}
+    .btn-danger{ background-color: #fc000c; background: linear-gradient(to right,#fc000c 0,#f9444d 100%); box-shadow: 0 5px 10px rgba(249,68,77,.25);}
+    .btn-info{ background-color: #5bc0de; background: linear-gradient(to right,#5bc0de 0,#7cc1d6 100%); box-shadow: 0 5px 10px rgba(124,193,214,.25);}
+    .btn-gray{ background-color: #282828; color: #ddd; background: linear-gradient(to right,#282828 0,#3b3b3b 100%); box-shadow: 0 5px 10px rgba(59,59,59,.25);}
+    .btn-warm,.btn-primary,.btn-danger,.btn-info{  color: #fff;}
+    .btn-warm:hover,.btn-primary:hover,.btn-danger:hover,.btn-info:hover,.btn-gray:hover{ color: #fff;}
+    .btn.disabled{ cursor: not-allowed; opacity: 0.6;}
+	a,button{ text-decoration:none; outline:none; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+</style>
 </head>
 <body>
 <div class="prism-player" id="player-con"></div>
+	<div id="playlist1" class="tab-pane fade clearfix active in">
+		<ul class="myui-content__list sort-list clearfix" style="max-height: 300px; overflow: auto;">
+			<li class="col-lg-6 col-md-5 col-sm-4 col-xs-2">
+				#if($count==1)
+    				<a class="btn btn-default" href="$rc.contextPath/tbMovie/viewPlayer?movieId=$movie.movieId&order=1">全集</a>
+				#else
+					#foreach($orderNo in [1..$count])
+						<a class="btn btn-default" href="$rc.contextPath/tbMovie/viewPlayer?movieId=$movie.movieId&order=${orderNo}">第${orderNo}集</a>
+					#end
+				#end
+			</li>
+		</ul>
+	</div>
 <script>
 var player = new Aliplayer({
   "id": "player-con",
-  "source": "$movie.url",
+  "source": "$rc.contextPath$movie.srcUrl",
   "width": "100%",
   "height": "500px",
   "autoplay": true,

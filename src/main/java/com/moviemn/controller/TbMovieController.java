@@ -1,16 +1,11 @@
 package com.moviemn.controller;
 
-import com.moviemn.bean.TbMovie;
-import com.moviemn.service.TbMovieService;
-import com.moviemn.base.BaseController;
-import com.moviemn.base.Pagination;
-import com.moviemn.base.ServiceException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -18,12 +13,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.moviemn.base.BaseController;
+import com.moviemn.base.Pagination;
+import com.moviemn.base.ServiceException;
+import com.moviemn.bean.TbMovie;
+import com.moviemn.bean.TbMovieSeries;
+import com.moviemn.service.TbMovieSeriesService;
+import com.moviemn.service.TbMovieService;
+
 @Controller
 @RequestMapping("/tbMovie")
 public class TbMovieController extends BaseController{ 
 	private static final Log LOG = LogFactory.getLog(TbMovieController.class);
 	@Inject
 	private TbMovieService tbMovieService;
+	
+	@Inject 
+	TbMovieSeriesService movieSeriesService;
 
 	@RequestMapping()
 	public String index(Model model, TbMovie tbMovie) {
@@ -39,10 +45,24 @@ public class TbMovieController extends BaseController{
 	}
 	
 	
+	@RequestMapping("viewPlayerbefore")
+	public String player(Model model,String src) {
+		model.addAttribute("src",src);
+		return "/tbMovie/player";
+	}
+	
+	
 	@RequestMapping("viewPlayer")
-	public String player(Model model,Integer id) {
-		TbMovie tbMovie = tbMovieService.querySingleTbMovieForColumn("id",id);
-		model.addAttribute("movie",tbMovie);
+	public String viewMovieSeries(Model model,Integer movieId, String order) {
+		//选中的剧集
+		Integer count = movieSeriesService.queryTbMovieSeriesCountForColumn("movie_id", movieId);
+		TbMovieSeries queryObj = new TbMovieSeries();
+		queryObj.setMovieId(movieId);
+		queryObj.setOrderNo(order);
+		TbMovieSeries tbMovieSeries = movieSeriesService.querySingleTbMovieSeries(queryObj);
+		
+		model.addAttribute("movie",tbMovieSeries);
+		model.addAttribute("count",count);
 		return "/tbMovie/player";
 	}
 	

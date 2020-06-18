@@ -62,18 +62,18 @@
 <!--------------Featured--------------->
 <div class="featured">
 	#foreach( $movie in $dataList)
-        #if( $velocityCount%2==0 )
+        #if( $velocityCount%3==2 )
         	<div class="col-1-3 center">
-        		<a href="$rc.contextPath/tbMovie/viewPlayer?id=$movie.id" ><img src="$rc.contextPath/$movie.picPath" /></a>
+        		<a href="$rc.contextPath/tbMovie/viewPlayer?movieId=$movie.id&order=1" ><img src="$rc.contextPath/$movie.picPath" /></a>
         	</div>
-        #elseif( $velocityCount%3==0 )
+        #elseif($velocityCount%3==0 )
             <div class="col-1-3">
-        		<a href="$rc.contextPath/tbMovie/viewPlayer?id=$movie.id" ><img src="$rc.contextPath/$movie.picPath" /></a>
+        		<a href="$rc.contextPath/tbMovie/viewPlayer?movieId=$movie.id&order=1" ><img src="$rc.contextPath/$movie.picPath" /></a>
         	</div>
         	<br/>
         #else
             <div class="col-1-3">
-        		<a href="$rc.contextPath/tbMovie/viewPlayer?id=$movie.id" ><img src="$rc.contextPath/$movie.picPath" /></a>
+        		<a href="$rc.contextPath/tbMovie/viewPlayer?movieId=$movie.id&order=1" ><img src="$rc.contextPath/$movie.picPath" /></a>
         	</div>
         #end
 	#end

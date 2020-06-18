@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.moviemn.utils.SpringContextUtil;
+import com.moviemn.util.SpringContextUtil;
 
 @Component
 public class QuartzInitService {

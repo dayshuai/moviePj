@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.moviemn.bean.User;
 import com.moviemn.service.UserService;
-import com.moviemn.utils.BeanUtils;
+import com.moviemn.util.BeanUtils;
 
 /**
  * ClassName: ShiroRealm

@@ -3,6 +3,9 @@
 <mapper namespace="com.moviemn.mapper.TbMovieMapper">
 	<resultMap type="com.moviemn.bean.TbMovie" id="TbMovie">
 				<result column="pic_path" property="picPath"/>
+				<result column="create_date" property="createDate"/>
+				<result column="update_date" property="updateDate"/>
+				
 	</resultMap>
 	
 	<sql id="columns">
@@ -16,7 +19,7 @@
 
 	<update id="update" parameterType="TbMovie">
 		UPDATE tb_movie
- 		SET name=#{name},url=#{url},pic_path=#{picPath},create_date=#{createDate},update_date=#{updateDate}
+ 		SET name=#{name},url=#{url},pic_path=#{picPath},update_date=sysdate()
 		WHERE id=#{id}
 	</update>
 

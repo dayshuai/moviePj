@@ -2,7 +2,6 @@ package com.moviemn.base;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class Pagination<E> {
 	private Integer pageStart;
 	private Integer pageEnd;

@@ -188,7 +188,7 @@
 										<label class="col-xs-4 control-label">
 										</label>
 										<div class="col-xs-8">
-											<input id="imageUrl" name="picPath" class="form-control" type="hidden">
+											<input id="picPath" name="picPath" class="form-control" type="hidden">
 										</div>
 									</div>
 								</form>
